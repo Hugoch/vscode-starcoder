@@ -1,0 +1,21 @@
+name: Build release
+on: [push]
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - run: npm i -g vsce
+      name: Install vsce
+    - run: npm install
+      name: Install dependencies
+    - run: "vsce package --baseContentUrl=https://github.com/hugoch/vscode-starcoder --baseImagesUrl=https://github.com/hugoch/vscode-starcoder"
+      name: Package extension
+    - uses: actions/upload-artifact@v3
+      name: Upload artifact
+      with:
+        name: starcoder-${{ github.sha }}
+        path: "*.vsix"
