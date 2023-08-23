@@ -1,0 +1,123 @@
+{
+  "name": "starcoder",
+  "displayName": "StarCoder",
+  "description": "Get completions from StarCoder model",
+  "version": "1.0.1",
+  "icon": "assets/icon.png",
+  "keywords": [
+    "code-suggestion",
+    "copilot",
+    "code-inference"
+  ],
+  "repository": {
+    "url": "https://github.com/hugoch/vscode-starcoder"
+  },
+  "license": "MIT",
+  "publisher": "Hugo Larcher",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "bugs": {
+    "url": "https://github.com/hugoch/vscode-starcoder"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "author": {
+    "name": "Hugo Larcher",
+    "url": "https://github.com/hugoch/vscode-starcoder"
+  },
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "starcoder.enable",
+        "shortTitle": "Enable StarCoder",
+        "title": "Enable StarCoder"
+      },
+      {
+        "command": "starcoder.disable",
+        "title": "Disable StarCoder",
+        "shortTitle": "Disable StarCoder"
+      }
+    ],
+    "configuration": {
+      "title": "StarCoder",
+      "properties": {
+        "starcoder.endpoint": {
+          "type": "string",
+          "default": "",
+          "description": "A private inference server endpoint. If not set, extension uses Hugging Face inference endpoint."
+        },
+        "starcoder.huggingFaceToken": {
+          "type": "string",
+          "default": "",
+          "description": "A HuggingFace hub token. Only needed when using Hugging Face endpoint."
+        },
+        "starcoder.maxTokens": {
+          "type": "number",
+          "default": 20
+        },
+        "starcoder.temperature": {
+          "type": "number",
+          "default": 0.1
+        },
+        "starcoder.maxLines": {
+          "type": "number",
+          "default": 100
+        },
+        "starcoder.suggestionDelay": {
+          "type": "number",
+          "default": 120
+        },
+        "starcoder.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Activate/Deactivate StarCoder auto-completions."
+        },
+        "starcoder.inlineCompletion": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "vscode:package": "npm exec vsce package",
+    "vscode:publish": "npm exec vsce publish"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@types/uuid": "^9.0.2",
+    "@types/vscode": "^1.70.0",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "@vscode/test-electron": "^2.1.5",
+    "@vscode/vsce": "^2.18.0",
+    "eslint": "^8.20.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "uuid": "^9.0.0"
+  }
+}
