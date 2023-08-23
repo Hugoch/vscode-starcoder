@@ -3,6 +3,8 @@
 This extension enables code suggestion and auto-completion using [Starcoder](https://huggingface.co/bigcode/starcoder) model.
 It relies on Hugging Face Starcoder inference endpoint or on a private inference endpoint.
 
+![Demo](./assets/vscode-starcoder-demo.gif)
+
 ## Usage
 
 1. Install the extension from release or from source
